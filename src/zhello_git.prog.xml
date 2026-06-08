@@ -1,1 +1,20 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<ABAP>
+  <PROG GNAME="ZHELLO_GIT">
+    <TEXTPOOL>
+      <TEXTPAIR>
+        <ID>S</ID>
+        <ENTRY>Hello Git Program</ENTRY>
+      </TEXTPAIR>
+      <TEXTPAIR>
+        <ID>001</ID>
+        <ENTRY>Hello from ABAP Git</ENTRY>
+      </TEXTPAIR>
+    </TEXTPOOL>
+    <LINES>
+      <LINE><![CDATA[REPORT zhello_git.]]></LINE>
+      <LINE><![CDATA[]]></LINE>
+      <LINE><![CDATA[WRITE: 'Hello from ABAP Git!'.]]></LINE>
+    </LINES>
+  </PROG>
+</ABAP>
