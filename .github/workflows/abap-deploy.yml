@@ -58,7 +58,12 @@ jobs:
           SAP_PASSWORD: ${{ secrets.SAP_PASSWORD }}
           PACKAGE: ${{ github.event.inputs.package || 'ZDEV_PACKAGE' }}
         run: |
-          python scripts/deploy_adt.py
+          python scripts/deploy_adt.py \
+            --host "$SAP_HOST" \
+            --port "$SAP_PORT" \
+            --user "$SAP_USER" \
+            --password "$SAP_PASSWORD" \
+            --package "$PACKAGE"
 
       - name: Upload Deployment Report
         if: always()
