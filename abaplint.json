@@ -1,0 +1,71 @@
+{
+  "global": {
+    "files": "/src/**/*.*"
+  },
+  "rules": {
+    "7bit_ascii": {
+      "enabled": true
+    },
+    "abapos_comments": {
+      "enabled": true
+    },
+    "allowed_object_naming_convention": {
+      "enabled": true,
+      "pattern": "^(/|Z|Y)[A-Z0-9_]*$"
+    },
+    "ambiguous_statement": {
+      "enabled": true
+    },
+    "class_attribute_naming": {
+      "enabled": true,
+      "statics": "^G[A-Z].*",
+      "instance": "^M[A-Z].*"
+    },
+    "empty_line_in_statement": {
+      "enabled": true
+    },
+    "identical_form_names": {
+      "enabled": true
+    },
+    "line_length": {
+      "enabled": true,
+      "length": 120
+    },
+    "local_variable_naming": {
+      "enabled": true,
+      "pattern": "^L[A-Z].*"
+    },
+    "main_file_contents": {
+      "enabled": true
+    },
+    "method_length": {
+      "enabled": true,
+      "errorafter": 100
+    },
+    "mixed_returning": {
+      "enabled": true
+    },
+    "nesting": {
+      "enabled": true,
+      "depth": 5
+    },
+    "parser_missing_space": {
+      "enabled": true
+    },
+    "prefer_is_not": {
+      "enabled": true
+    },
+    "space_before_colon": {
+      "enabled": true
+    },
+    "tagging_step_loop_name": {
+      "enabled": false
+    },
+    "unreachable_code": {
+      "enabled": true
+    },
+    "unused_variables": {
+      "enabled": true
+    }
+  }
+}
