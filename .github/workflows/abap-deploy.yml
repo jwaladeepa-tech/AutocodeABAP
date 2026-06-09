@@ -1,0 +1,69 @@
+name: Deploy ABAP to S/4HANA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'SAP Package to deploy to'
+        required: true
+        default: 'ZDEV_PACKAGE'
+
+jobs:
+  lint:
+    name: Lint ABAP Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install abaplint
+        run: npm install -g @abaplint/cli
+
+      - name: Run abaplint
+        run: abaplint src/
+        continue-on-error: true
+
+  deploy:
+    needs: lint
+    runs-on: ubuntu-latest
+    name: Deploy to S/4HANA
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Deploy ABAP Objects
+        env:
+          SAP_HOST: ${{ secrets.SAP_HOST }}
+          SAP_PORT: ${{ secrets.SAP_PORT }}
+          SAP_CLIENT: ${{ secrets.SAP_CLIENT }}
+          SAP_USER: ${{ secrets.SAP_USER }}
+          SAP_PASSWORD: ${{ secrets.SAP_PASSWORD }}
+          PACKAGE: ${{ github.event.inputs.package || 'ZDEV_PACKAGE' }}
+        run: |
+          python scripts/deploy_adt.py
+
+      - name: Upload Deployment Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-report
+          path: deployment-report.json
+          retention-days: 30
